@@ -60,6 +60,9 @@ class Clipboard:
         self._items = set()  # type: Set[ClipboardItem]
         self.capacity = capacity
 
+        # cache of the max order in items
+        self._max_order = 0  # type: T_SORTING_ORDER
+
     def __len__(self) -> int:
         return len(self._items)
 
@@ -76,6 +79,7 @@ class Clipboard:
         return {
             "capacity": self._capacity,
             "capacity_real": self._capacity_real,
+            "max_order": self._max_order,
             "items": {
                 "living": items[-self._capacity :],
                 "dead": items[:dead_count],
@@ -113,6 +117,7 @@ class Clipboard:
             item.order = self.get_next_order()
 
         self._items.add(item)
+        self._suggest_max_order(item.order)
 
         self.cleanup()
 
@@ -134,20 +139,16 @@ class Clipboard:
     def make_texts_latest(self, texts: T_SELECTION_TEXTS) -> bool:
         for item in self._items:
             if item.texts == texts:
-                max_order = self.get_max_order()
-
-                if item.order != max_order:
-                    item.order = max_order + 1
+                if item.order != self._max_order:
+                    item.order = self.get_next_order()
+                    self._suggest_max_order(item.order)
 
                 return True
 
         return False
 
-    def get_max_order(self) -> T_SORTING_ORDER:
-        return max(item.order for item in self._items) if self._items else 0
-
     def get_next_order(self) -> T_SORTING_ORDER:
-        return self.get_max_order() + 1
+        return self._max_order + 1
 
     def get_sorted_items(self, reverse: bool = False, include_dead: bool = False) -> List[ClipboardItem]:
         items = sorted(self._items, key=lambda item: item.order)
@@ -170,3 +171,11 @@ class Clipboard:
             self.remove_by_ids(
                 item.id for item in self.get_sorted_items(include_dead=True)[: len(self._items) - self._capacity]
             )
+
+    def _suggest_max_order(self, order: T_SORTING_ORDER) -> bool:
+        if self._max_order < order:
+            self._max_order = order
+
+            return True
+
+        return False
