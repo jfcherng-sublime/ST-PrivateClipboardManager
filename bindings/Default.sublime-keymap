@@ -1,0 +1,45 @@
+[
+    {
+        "keys": ["alt+p", "alt+c"],
+        "command": "private_clipboard_manager",
+        "args": {
+            "operation": "copy"
+        }
+    },
+    {
+        "keys": ["alt+p", "alt+x"],
+        "command": "private_clipboard_manager",
+        "args": {
+            "operation": "cut"
+        }
+    },
+    {
+        // directly paste the latest history
+        "keys": ["alt+p", "alt+v"],
+        "command": "private_clipboard_manager",
+        "args": {
+            "operation": "paste",
+            "args": {
+                "nth": -1
+            }
+        }
+    },
+    {
+        // choose which history to paste
+        "keys": ["alt+p", "alt+p"],
+        "command": "private_clipboard_manager",
+        "args": {
+            "operation": "paste"
+        }
+    },
+    /*
+    {
+        // print all data in the clipboard to the console
+        "keys": ["alt+p", "alt+d"],
+        "command": "private_clipboard_manager",
+        "args": {
+            "operation": "debug"
+        }
+    },
+    */
+]

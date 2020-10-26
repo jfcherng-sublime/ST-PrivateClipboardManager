@@ -1,0 +1,14 @@
+{
+    // the maximum of numbers of stored items in the clipboard
+    "clipboard_capacity": 20,
+
+    // auto make the pasted item as the newest item in the history
+    "promote_pasted_item": true,
+
+    // the delimiter used to separate text in carets in an item
+    "caret_texts_delimiter": " ||| ",
+
+    // the one-character sign which indicates an item in the clipboard is applicable or not
+    "sign_item_applicable": "Y",
+    "sign_item_inapplicable": "N",
+}
