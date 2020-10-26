@@ -29,6 +29,7 @@ def get_clipboard() -> Clipboard:
 
 
 class ManagerOperations(enum.IntEnum):
+    clear = enum.auto()
     copy = enum.auto()
     cut = enum.auto()
     debug = enum.auto()
@@ -53,6 +54,9 @@ class PrivateClipboardManagerCommand(sublime_plugin.TextCommand):
 
             if m_op == ManagerOperations.paste:
                 return self._do_paste(clipboard, args=args)
+
+            if m_op == ManagerOperations.clear:
+                return self._do_clear(clipboard, args=args)
 
         except (KeyError, ValueError):
             error_msg(f"Unknown operation: {operation}")
@@ -119,6 +123,11 @@ class PrivateClipboardManagerCommand(sublime_plugin.TextCommand):
             ),
             placeholder="Choose the text to be pasted...",
         )
+
+    def _do_clear(self, clipboard: Clipboard, args: Dict[str, Any] = {}) -> None:
+        clipboard.clear()
+
+        status_msg("All items have been deleted!")
 
     def _do_debug(self, clipboard: Clipboard, args: Dict[str, Any] = {}) -> None:
         console_msg(f"Clipboard information: {clipboard!r}")

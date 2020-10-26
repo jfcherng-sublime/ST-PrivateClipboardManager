@@ -32,6 +32,14 @@
             "operation": "paste"
         }
     },
+    {
+        // remove all items from the clipboard
+        "keys": ["alt+p", "alt+delete"],
+        "command": "private_clipboard_manager",
+        "args": {
+            "operation": "clear"
+        }
+    },
     /*
     {
         // print all data in the clipboard to the console

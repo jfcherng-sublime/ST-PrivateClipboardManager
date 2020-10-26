@@ -172,6 +172,9 @@ class Clipboard:
                 item.id for item in self.get_sorted_items(include_dead=True)[: len(self._items) - self._capacity]
             )
 
+    def clear(self) -> None:
+        self.remove_by_ids(item.id for item in self._items)
+
     def _suggest_max_order(self, order: T_SORTING_ORDER) -> bool:
         if self._max_order < order:
             self._max_order = order

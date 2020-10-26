@@ -39,3 +39,6 @@ self-explanatory. But if you still have questions, feel free to open an issue.
 
 - <kbd>Alt + p</kbd>, <kbd>Alt + p</kbd>:
   Open a quick panel to let you choose which item to be pasted.
+
+- <kbd>Alt + p</kbd>, <kbd>Alt + Delete</kbd>:
+  Remove all items from the clipboard.
