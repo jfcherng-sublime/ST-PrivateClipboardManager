@@ -12,6 +12,25 @@ Provides a private text-only clipboard which won't pollute the system one.
 
 Note that this plugin only works on Sublime Text >= 4085.
 
+## Why
+
+- This plugin won't pollute the system clipboard.
+- ST has some problems when pasting multi-line content with multi-cursor.
+
+  For example,
+
+  1. Copy with two carets. Each cursor selects two lines.
+  1. Directly paste the just copied content by <kbd>Ctrl + v</kbd>.
+  1. BOOM!!!
+
+- Plugin commands can be handy in chained commands or macros.
+
+## Features
+
+- It provides a private clipboard, which won't modify the system clipboard, in ST.
+- It pastes what it copied as-is, if the caret counts matches.
+- It keeps a certain numbers of newest clipboard histories.
+
 ## Install
 
 1. This plugin is not published on the official Package Control.
