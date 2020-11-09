@@ -33,6 +33,7 @@ class ClipboardItem:
 
     def __repr__(self) -> str:
         return {
+            # ...
             "id": self._id,
             "texts": self.texts,
             "order": self.order,
@@ -81,6 +82,7 @@ class Clipboard:
             "capacity_real": self._capacity_real,
             "max_order": self._max_order,
             "items": {
+                # ...
                 "living": items[-self._capacity :],
                 "dead": items[:dead_count],
             },

@@ -62,11 +62,7 @@ class PrivateClipboardManagerCommand(sublime_plugin.TextCommand):
             error_msg(f"Unknown operation: {operation}")
 
     def _do_copy_or_cut(
-        self,
-        clipboard: Clipboard,
-        edit: sublime.Edit,
-        m_op: ManagerOperations,
-        args: Dict[str, Any] = {},
+        self, clipboard: Clipboard, edit: sublime.Edit, m_op: ManagerOperations, args: Dict[str, Any] = {},
     ) -> None:
         sel = self.view.sel()
 
@@ -91,10 +87,7 @@ class PrivateClipboardManagerCommand(sublime_plugin.TextCommand):
 
     def _do_paste(self, clipboard: Clipboard, args: Dict[str, Any] = {}) -> None:
         def run_paste_command(view: sublime.View, args: Dict[str, Any] = {}) -> None:
-            view.run_command(
-                get_class_command_name(PrivateClipboardManagerPasteCommand),
-                {"args": args},
-            )
+            view.run_command(get_class_command_name(PrivateClipboardManagerPasteCommand), {"args": args})
 
         def create_panel_item(view: sublime.View, item: ClipboardItem) -> sublime.QuickPanelItem:
             return sublime.QuickPanelItem(
@@ -118,6 +111,7 @@ class PrivateClipboardManagerCommand(sublime_plugin.TextCommand):
                 self.view,
                 {
                     **args,
+                    # ...
                     "nth": None if idx == -1 else len(panel_items) - (idx + 1),
                 },
             ),
